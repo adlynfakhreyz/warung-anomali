@@ -92,7 +92,6 @@ Buat juga *remote repository* di GitHub dan hubungkan dengan repositori di lokal
 
 ### Melakukan *Deployment*
 1. Untuk melakukan *deployment* ke PWS, *Login* terlebih dahulu ke PWS, dan *Create New Project*.
-2. Setelah dibuat, akan muncul *Project Credentials* dan *Project Commands*. Sebelum menjalankan *Project Commands*, tambahkan terlebih dahulu URL PWS (`'andi-muhammad37-warunganomali.pbp.cs.ui.ac.id'`) ke list `ALLOWED_HOSTS` pada `settings.py` yang berada di direktori proyek. Kemudian *add*, *commit*, *push* ke GitHub.
 3. Setelah itu jalankan *Project Commands*, kemudian ubah kembali nama *branch* menjadi main dengan menjalankan: `git branch -M main`
 4. Apabila status *deployment* pada proyek di PWS sudah *Running*, artinya sudah berhasil di *deploy*.
 
@@ -103,7 +102,7 @@ Buat juga *remote repository* di GitHub dan hubungkan dengan repositori di lokal
 - ## Bagan *request client* ke web aplikasi serta kaitan antara ```urls.py```, ```views.py```, ```models.py```, dan berkas ```html```.
 ---
 <div align="center">
-  <img src="https://imgtr.ee/images/2024/09/10/90c4b0291c636064be7534139c7ef1cd.png" alt="Bagan" />
+  <img src="https://imgtr.ee/images/2024/09/10/2ebe9975bb81330faeb31833cc9ad7cc.png" alt="Bagan" />
 </div>
 
 
