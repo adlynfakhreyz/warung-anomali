@@ -401,14 +401,14 @@ urlpatterns = [
 
 - ## *Screenshot* dari hasil akses URL pada *Postman*
 ---
-**XML**
-<img src="https://i.ibb.co.com/K0YW1dV/Whats-App-Image-2024-09-18-at-06-58-51-870bb0f4.jpg" alt="xml" />
+**XML**  
+<img src="https://i.ibb.co.com/HTbxHd7/Whats-App-Image-2024-09-18-at-11-36-13-21805b73.jpg" alt="xml" />
   
-**JSON**
-<img src="https://i.ibb.co.com/1Jnsnqg/Whats-App-Image-2024-09-18-at-10-19-29-8b4ffcc2.jpg" alt="json" />
+**JSON**  
+<img src="https://i.ibb.co.com/xJjncXZ/Whats-App-Image-2024-09-18-at-11-36-58-d8dec9b6.jpg" alt="json" />
 
-**XML by id**
-<img src="https://i.ibb.co.com/6HtJzBs/Whats-App-Image-2024-09-18-at-07-00-01-44c3e2f7.jpg" alt="xml_by_id" />
+**XML by id**  
+<img src="https://i.ibb.co.com/j8sTrcN/Whats-App-Image-2024-09-18-at-11-36-35-2cd1a462.jpg" alt="xml_by_id" />
 
-**JSON by id**
-<img src="https://i.ibb.co.com/B6PcNvz/Whats-App-Image-2024-09-18-at-07-00-51-bd121ce1.jpg" alt="json_by_id" />
+**JSON by id**  
+<img src="https://i.ibb.co.com/wd0czZB/Whats-App-Image-2024-09-18-at-11-37-21-553810a9.jpg" alt="json_by_id" />
