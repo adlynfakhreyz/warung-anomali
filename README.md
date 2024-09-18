@@ -306,7 +306,7 @@ urlpatterns = [
     <th>Stock</th>    
   </tr>
 
-  {% comment %} Berikut cara memperlihatkan data mood di bawah baris ini 
+  {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
   {% endcomment %} 
   {% for product_entry in product_entries %}
   <tr>
