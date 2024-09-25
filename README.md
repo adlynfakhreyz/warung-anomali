@@ -767,3 +767,6 @@ def show_main(request):
 5. Kemudian lakukan migrasi model
 
 #### Membuat dua akun pengguna dengan masing-masing tiga *dummy data* menggunakan model yang telah dibuat
+<img src='https://github.com/user-attachments/assets/5107c5bf-02e5-48c8-b125-ce2309a5b0aa'>
+
+<img src='https://github.com/user-attachments/assets/33dc70b5-9fce-40ba-876e-9bf689875ab9'>
