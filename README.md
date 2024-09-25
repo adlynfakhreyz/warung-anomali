@@ -103,9 +103,7 @@ Buat juga *remote repository* di GitHub dan hubungkan dengan repositori di lokal
 
 - ## Bagan *request client* ke web aplikasi serta kaitan antara ```urls.py```, ```views.py```, ```models.py```, dan berkas ```html```.
 ---
-<div align="center">
-  <img src="https://imgtr.ee/images/2024/09/10/2ebe9975bb81330faeb31833cc9ad7cc.png" alt="Bagan" />
-</div>
+<img src="https://github.com/user-attachments/assets/44954d85-64a7-412a-9ed0-094164c3a8dd" alt="Bagan" />
 
 
 - ## Fungsi ```git``` dalam pengembangan perangkat lunak
