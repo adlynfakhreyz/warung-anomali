@@ -1208,7 +1208,7 @@ dengan mengubah `base.html` menjadi seperti berikut
     {% endblock content %}
     ```
 
-5. Tambahkan berkas `card_info` dan `card_product` untuk menampilakan informasi user dan product
+5. Tambahkan berkas `card_info` dan `card_product` untuk menampilakan informasi user dan product. Pada `card_product` tambahkann juga 2 button untuk `delete` dan `edit`.
     `card_info.html`:
     ```html
     <div class="bg-[#1A1A1A] rounded-xl overflow-hidden border-2 border-[#1A1A1A] shadow-md" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);">
@@ -1249,7 +1249,7 @@ dengan mengubah `base.html` menjadi seperti berikut
         <!-- Warna Section -->
         <div class="mt-2">
         <p class="text-white font-semibold">Warna</p>
-        <span class="text-gray-300">Kuning</span>
+        <span class="text-gray-300">{{ product_entry.color }}</span>
         </div>
 
         <!-- Price -->

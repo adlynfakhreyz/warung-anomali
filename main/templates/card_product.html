@@ -1,4 +1,4 @@
-<div class="relative break-inside-avoid shadow-lg rounded-lg bg-[#1A1A1A] p-4 mb-6 flex flex-col border border-[#3A3A3A] transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);">
+<div class="relative break-inside-avoid shadow-lg rounded-lg bg-[#1A1A1A] p-4 mb-6 flex flex-col border border-[#3A3A3A] transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);">
   <!-- Image Section -->
   <div class="relative">
     <!-- Clothing Image --> 
@@ -27,7 +27,7 @@
     <!-- Warna Section -->
     <div class="mt-2">
       <p class="text-white font-semibold">Warna</p>
-      <span class="text-gray-300">Kuning</span>
+      <span class="text-gray-300">{{ Kuning }}</span>
     </div>
 
     <!-- Price -->
@@ -54,7 +54,7 @@
           </span>
         </span>
       {% endif %}
-      <a href="{% url 'main:edit_product' product_entry.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white text-outline rounded-full px-5 py-2 text-lg transition duration-300 shadow-lg" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);">
+      <a href="{% url 'main:edit_product' product_entry.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white text-outline rounded-full px-5 py-2 text-lg transition duration-300 shadow-lg" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);">
         Edit
       </a>    
     </div>      
