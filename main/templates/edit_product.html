@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>Create Product</title>
+<title>Edit Product Details</title>
 {% endblock meta %}
 
 {% block content %}
@@ -9,18 +9,18 @@
 
 <div class="flex flex-col min-h-screen">
   <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
-    <h1 class="text-3xl text-center mb-8 text-white">Create Product Entry</h1>
+    <h1 class="text-3xl  text-center mb-8 text-white">Edit Product Details</h1>
   
-    <div class="bg-[#1A1A1A] shadow-md rounded-lg p-6 form-style" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);">
+    <div class="bg-[#1A1A1A] shadow-md rounded-lg p-6 form-style" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);"">
       <form method="POST" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {% csrf_token %}
         {% for field in form %}
           <div class="flex flex-col {% if field.label == 'Description' %}col-span-1 lg:col-span-2{% endif %}">
             <label for="{{ field.id_for_label }}" class="mb-2 text-[#777777]">
-              {{ field.label }}
+             {{ field.label }}
             </label>
-            <div class="w-full">
-              {{ field }}
+           <div class="w-full">
+             {{ field }}
             </div>
             {% if field.help_text %}
               <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
@@ -32,14 +32,14 @@
         {% endfor %}
         <div class="grid grid-cols-1 lg:grid-cols-2 justify-center mt-6 lg:col-span-2 gap-4">
           <button type="submit" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out w-full" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);">
-            Save
+            Save Edit
           </button>
           <a href="{% url 'main:show_main' %}" class="bg-red-600 text-white font-semibold px-6 py-3 rounded-lg text-center hover:bg-red-700 transition duration-300 ease-in-out w-full" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);">
             Cancel
           </a>
-        </div>
+        </div>          
       </form>
     </div>
   </div>
 </div>
-{% endblock content %}
+{% endblock %}
