@@ -14,14 +14,12 @@ from django.urls import reverse
 # Fungsi yang menampilkan main
 @login_required(login_url='/login')
 def show_main(request):
-    product_entries = Product.objects.filter(user=request.user)
     
     context = {
         'project_name' : 'Warung Anomali',
         'npm' : '2306241713',
         'name': request.user.username,
         'class': 'PBP B',
-        'product_entries': product_entries,
         'last_login': request.COOKIES['last_login']
     }
 
@@ -40,11 +38,11 @@ def create_product_entry(request):
     return render(request, "create_product_entry.html", context)
 
 def show_xml(request):
-    data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
