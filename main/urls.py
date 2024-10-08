@@ -15,5 +15,5 @@ urlpatterns = [
     path('login/', login_user, name='login'), # routing untuk ketika ingin login
     path('logout/', logout_user, name='logout'), # routing untuk ketika ingin logout
     path('edit_product/<uuid:id>', edit_product, name='edit_product'),
-    path('delete/<uuid:id>', delete_product, name='delete_product')
+    path('delete_product/<uuid:id>', delete_product, name='delete_product')
 ]
