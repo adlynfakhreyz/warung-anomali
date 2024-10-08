@@ -79,7 +79,7 @@ def login_user(request):
                 return response
             else:
                 # menambahkan error message
-                messages.error(request, "Invalid username or password.")
+                messages.error(request, "Invalid username or password. Please try again.")
 
         else:
             form = AuthenticationForm(request)
