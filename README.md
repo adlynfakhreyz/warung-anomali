@@ -1383,14 +1383,14 @@ Dengan memahami dan menerapkan prinsip-prinsip ini, kita dapat meningkatkan keam
 - ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial !
 ---
 ### AJAX `GET`
-1. Karena kita tidak menampilkan data produk dengan fungsi `show_main` kita bis menghapus variable `product_entries`
+1. Karena kita tidak menampilkan data produk dengan fungsi `show_main` kita bisa menghapus variable `product_entries`
 2. Karena kita akan melakukan fetch data dari response yang dihasilkan fungsi `show_json`, karena sebelumnya filternya all ubah jadi filter berdasarkan user yang sedang logged in terlebih dahulu
 ```py
 data = Product.objects.filter(user=request.user)
 ```
 3. Kemudian perlu dilakukan perubahan pada `main.html`, hapus block conditional yang sebelumnya dipergunakan untu mengiterasi data produk dan ganti menjadi
 ```html
-<div id="mood_entry_cards"></div>
+<div id="product_entry_cards"></div>
 ```
 4. Kemudian tambahkan `<script>`, didalamnya tambahkan fungsi yang melakukan fetch data produk dari json dan fungsi yang menambahkan tampilan produk
 ```js
