@@ -856,7 +856,7 @@ Kegunaan: Flexbox sangat cocok untuk mengelola tata letak responsif pada kompone
 Grid Layout merupakan sistem tata letak dua dimensi yang digunakan untuk membuat layout dalam bentuk baris dan kolom. Dengan Grid, kita bisa menentukan berapa banyak kolom dan baris yang ada dalam layout serta bagaimana elemen ditempatkan di dalam grid tersebut. Grid memberikan kontrol yang lebih besar atas penempatan elemen dan sangat efektif untuk tata letak yang kompleks.
 Kegunaan: Grid Layout ideal untuk halaman web dengan banyak bagian terpisah, di mana penempatan elemen perlu diatur dengan lebih detail. Ini memungkinkan pembuatan desain yang lebih terstruktur dan rapi.
 
-- ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- ## Step-by-step Implementasi poin-poin yang ada pada Checklist Tugas 5
 ---
 
 ### Setup Tailwind dan konfigurasi static files untuk styling
@@ -1380,18 +1380,21 @@ Pembersihan data input pengguna dilakukan di backend karena beberapa alasan:
 
 Dengan memahami dan menerapkan prinsip-prinsip ini, kita dapat meningkatkan keamanan, kinerja, dan keandalan aplikasi web yang kita kembangkan.
 
-- ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial !
+- ## Step-by-step Implementasi poin-poin yang ada pada Checklist Tugas 6
 ---
 ### AJAX `GET`
 1. Karena kita tidak menampilkan data produk dengan fungsi `show_main` kita bisa menghapus variable `product_entries`
+
 2. Karena kita akan melakukan fetch data dari response yang dihasilkan fungsi `show_json`, karena sebelumnya filternya all ubah jadi filter berdasarkan user yang sedang logged in terlebih dahulu
 ```py
 data = Product.objects.filter(user=request.user)
 ```
+
 3. Kemudian perlu dilakukan perubahan pada `main.html`, hapus block conditional yang sebelumnya dipergunakan untu mengiterasi data produk dan ganti menjadi
 ```html
 <div id="product_entry_cards"></div>
 ```
+
 4. Kemudian tambahkan `<script>`, didalamnya tambahkan fungsi yang melakukan fetch data produk dari json dan fungsi yang menambahkan tampilan produk
 ```js
 <script>
@@ -1443,6 +1446,7 @@ refreshProductEntries();
 ...
 </script>
 ```
+
 5. Saya juga menggunakan DOM purify untuk melakukan pembersihan data di frontend, detail implementasinya bisa dilihat pada `main.html`
 
 ### AJAX `POST`
@@ -1497,6 +1501,7 @@ const modal = document.getElementById('crudModal');
   document.getElementById("cancelButton").addEventListener("click", hideModal);
   document.getElementById("closeModalBtn").addEventListener("click", hideModal);
 ```
+
 2. Tambahkan fungsi pada `views.py` yang akan membuat objek produk baru berdasarkan data yang diisi melalu form kemudian menyimpannya ke basis data serta melakukan pembersihan denga `strip_tags`, kemudian lakukan routing pada `urls.py`
 
 ```py
@@ -1534,6 +1539,7 @@ urlpatterns = [
     path('create-product-entry-ajax', add_product_entry_ajax, name='add_product_entry_ajax'),
 ]
 ```
+
 3. Kemudian buat fungsi pada script di `main.html` yang menghubungkan isi form di dalam modal dengan path `create-product-entry-ajax` dan juga merefresh halamann. Yang terjadi adalah data dari form dikirimkan secara AJAX kemudian fungsi pada `views.py` yang akan menyimpannya ke basis daata.
 ```js
 <script>
