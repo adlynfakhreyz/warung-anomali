@@ -12,6 +12,7 @@
 - #### [Tugas 3](#tugas-3)
 - #### [Tugas 4](#tugas-4)
 - #### [Tugas 5](#tugas-5)
+- #### [Tugas 6](#tugas-6)
 
 # Tugas 2
 ___
@@ -1327,3 +1328,232 @@ dengan mengubah `base.html` menjadi seperti berikut
     {% endif %}
     {% endblock content %}
     ```
+
+# Tugas 6
+---
+
+- ## Manfaat Penggunaan JavaScript dalam Pengembangan Aplikasi Web
+---
+
+JavaScript memiliki beberapa manfaat penting dalam pengembangan aplikasi web, antara lain:
+
+- **Interaktivitas**: JavaScript memungkinkan pengembang untuk menambahkan elemen interaktif ke dalam halaman web, seperti formulir yang dapat dikirim, animasi, dan konten dinamis tanpa harus memuat ulang halaman.
+
+- **Manipulasi DOM**: Dengan JavaScript, pengembang dapat mengubah elemen HTML dan CSS secara langsung setelah halaman dimuat, memberikan pengalaman pengguna yang lebih responsif.
+
+- **Pengolahan Data di Klien**: JavaScript dapat digunakan untuk memproses data di sisi klien, mengurangi beban server dan meningkatkan kinerja aplikasi.
+
+- **Dukungan API**: JavaScript, terutama dengan penggunaan `fetch()` dan AJAX, memudahkan pengembang untuk berkomunikasi dengan server dan mendapatkan data secara asinkron.
+
+- **Kompatibilitas Lintas Platform**: JavaScript berjalan di hampir semua browser modern, menjadikannya pilihan yang ideal untuk pengembangan web yang dapat diakses di berbagai perangkat.
+
+- ## Fungsi Penggunaan `await` Ketika Menggunakan `fetch()`
+---
+
+Penggunaan `await` dalam konteks `fetch()` adalah untuk menunggu hingga permintaan HTTP selesai dan mendapatkan responsnya. Berikut adalah penjelasan lebih lanjut:
+
+- **Fungsi `await`**: Ketika kita menggunakan `await` sebelum `fetch()`, kode akan menunggu hingga permintaan tersebut selesai. Setelah respons diterima, hasilnya dapat diproses lebih lanjut.
+
+- **Tanpa `await`**: Jika kita tidak menggunakan `await`, permintaan akan tetap berjalan secara asinkron, tetapi kode di bawahnya akan dieksekusi tanpa menunggu respons. Hal ini dapat menyebabkan kesalahan jika kita mencoba untuk mengakses data dari respons yang belum diterima, atau dapat menghasilkan perilaku yang tidak diinginkan dalam aplikasi.
+
+- ## Mengapa Perlu Menggunakan Decorator `csrf_exempt` pada View untuk AJAX POST
+
+Decorator `csrf_exempt` diperlukan pada view yang akan digunakan untuk AJAX POST karena:
+
+- **Keamanan CSRF**: CSRF (Cross-Site Request Forgery) adalah serangan yang dapat menyebabkan permintaan berbahaya yang dilakukan oleh pengguna yang terautentikasi. Django menggunakan token CSRF untuk melindungi aplikasi dari serangan ini.
+
+- **Penggunaan AJAX**: Ketika mengirimkan permintaan AJAX, token CSRF tidak selalu secara otomatis disertakan. Dengan menggunakan `csrf_exempt`, kita dapat mengizinkan permintaan POST tanpa memerlukan token CSRF, yang berguna untuk API yang tidak memerlukan perlindungan CSRF.
+
+- **Namun, perlu diingat**: Menggunakan `csrf_exempt` dapat menurunkan keamanan, jadi harus digunakan dengan hati-hati dan hanya jika kita yakin bahwa endpoint tersebut aman.
+
+- ## Alasan Pembersihan Data Input Pengguna Dilakukan di Backend
+---
+Pembersihan data input pengguna dilakukan di backend karena beberapa alasan:
+
+- **Keamanan**: Meskipun pembersihan data dapat dilakukan di frontend, data yang dikirim ke server tetap dapat dimanipulasi oleh pengguna. Pembersihan di backend menjamin bahwa data yang diterima aman dan sesuai.
+
+- **Validasi yang Konsisten**: Mengandalkan frontend untuk melakukan validasi bisa berisiko, karena pengguna dapat memodifikasi kode JavaScript di browser. Dengan melakukan validasi di backend, kita memastikan bahwa semua data yang diterima sudah diverifikasi dengan benar.
+
+- **Penyimpanan Data yang Aman**: Jika data yang tidak valid atau berbahaya disimpan di server, itu dapat menyebabkan kerentanan di seluruh aplikasi. Pembersihan dan validasi di backend mencegah masalah ini.
+
+- **Pengalaman Pengguna yang Lebih Baik**: Meskipun validasi di frontend dapat memberikan umpan balik langsung kepada pengguna, validasi di backend memastikan bahwa data yang diterima benar-benar valid, memberikan lapisan perlindungan tambahan untuk aplikasi.
+
+Dengan memahami dan menerapkan prinsip-prinsip ini, kita dapat meningkatkan keamanan, kinerja, dan keandalan aplikasi web yang kita kembangkan.
+
+- ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial !
+---
+### AJAX `GET`
+1. Karena kita tidak menampilkan data produk dengan fungsi `show_main` kita bis menghapus variable `product_entries`
+2. Karena kita akan melakukan fetch data dari response yang dihasilkan fungsi `show_json`, karena sebelumnya filternya all ubah jadi filter berdasarkan user yang sedang logged in terlebih dahulu
+```py
+data = Product.objects.filter(user=request.user)
+```
+3. Kemudian perlu dilakukan perubahan pada `main.html`, hapus block conditional yang sebelumnya dipergunakan untu mengiterasi data produk dan ganti menjadi
+```html
+<div id="mood_entry_cards"></div>
+```
+4. Kemudian tambahkan `<script>`, didalamnya tambahkan fungsi yang melakukan fetch data produk dari json dan fungsi yang menambahkan tampilan produk
+```js
+<script>
+...
+async function getProductEntries(){
+    return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+}
+
+async function refreshProductEntries() {
+    document.getElementById("product_entry_cards").innerHTML = "";
+    document.getElementById("product_entry_cards").className = "";
+    const productEntries = await getProductEntries();
+    let htmlString = "";
+    let classNameString = "";
+
+    if (productEntries.length === 0) {
+        classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+        htmlString = `
+            <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+            <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+            <p class="text-center text-gray-600 mt-4">Belum ada data product pada warung anomali.</p>
+            </div>
+        `;
+    }
+    else {
+        classNameString = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full";
+
+        productEntries.forEach((item) => {
+            const name = DOMPurify.sanitize(item.fields.name);
+            const color = DOMPurify.sanitize(item.fields.color);
+            const description = DOMPurify.sanitize(item.fields.description);
+
+            // Truncate description manually in JS
+            const desc = truncateByLength(description, 50);
+
+            // Determine stock status
+            const inStock = item.fields.stock > 0;
+            const stockClass = inStock ? 'text-green-400' : 'text-red-400';
+            const stockText = inStock ? 'IN STOCK' : 'UNAVAILABLE';
+            const stockCount = item.fields.stock > 10 ? '10+' : item.fields.stock;  
+            
+            htmlString += ` ... '
+        });
+    }
+    document.getElementById("product_entry_cards").className = classNameString;
+    document.getElementById("product_entry_cards").innerHTML = htmlString;
+}
+refreshProductEntries();
+...
+</script>
+```
+5. Saya juga menggunakan DOM purify untuk melakukan pembersihan data di frontend, detail implementasinya bisa dilihat pada `main.html`
+
+### AJAX `POST`
+---
+1. Buat button yang akan membuka sebuah modal, detail modal dan script terkait modalnya bisa dilihat pada `main.html`.
+```html
+...
+  <div class="flex justify-end mb-6">
+    <a href="{% url 'main:create_product_entry' %}" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 mx-4" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);">
+      Add New Product
+    </a>
+    <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" style="box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);" onclick="showModal();">
+      Add New Product Entry by AJAX
+    </button>
+  </div>
+  ...
+```
+```html
+<div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+    <div id="crudModalContent" class="relative bg-[#1A1A1A] rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
+        ...
+    </div>
+  </div>
+```
+```js
+const modal = document.getElementById('crudModal');
+  const modalContent = document.getElementById('crudModalContent');
+
+  function showModal() {
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+
+      modal.classList.remove('hidden'); 
+      setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+      }, 50); 
+  }
+
+  function hideModal() {
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+
+      modalContent.classList.remove('opacity-100', 'scale-100');
+      modalContent.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150); 
+  }
+
+  document.getElementById("cancelButton").addEventListener("click", hideModal);
+  document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+```
+2. Tambahkan fungsi pada `views.py` yang akan membuat objek produk baru berdasarkan data yang diisi melalu form kemudian menyimpannya ke basis data serta melakukan pembersihan denga `strip_tags`, kemudian lakukan routing pada `urls.py`
+
+```py
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
+...
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    color = strip_tags(request.POST.get("color"))
+    stock = request.POST.get("stock")
+    description = strip_tags(request.POST.get("description"))
+    user = request.user
+
+    new_product = Product(
+        name=name,
+        price=price,
+        color=color,
+        stock=stock,
+        description=description,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+```
+```py
+from main.views import ..., add_product_entry_ajax
+...
+urlpatterns = [
+    ...
+    path('create-product-entry-ajax', add_product_entry_ajax, name='add_product_entry_ajax'),
+]
+```
+3. Kemudian buat fungsi pada script di `main.html` yang menghubungkan isi form di dalam modal dengan path `create-product-entry-ajax` dan juga merefresh halamann. Yang terjadi adalah data dari form dikirimkan secara AJAX kemudian fungsi pada `views.py` yang akan menyimpannya ke basis daata.
+```js
+<script>
+function addProductEntry() {
+      fetch("{% url 'main:add_product_entry_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#productEntryForm')),
+      })
+      .then(response => refreshProductEntries())
+  
+      document.getElementById("productEntryForm").reset(); 
+      document.querySelector("[data-modal-toggle='crudModal']").click();
+  
+      return false;
+    }
+...
+document.getElementById("productEntryForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    addProductEntry();
+    hideModal();
+  })
+</script>
+```
